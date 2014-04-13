@@ -1,0 +1,89 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http auto-config="true">
+		<form-login login-page="/login" authentication-failure-url="/loginfailed"
+			default-target-url="/"
+			always-use-default-target="false"
+			authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler" />
+		<logout logout-success-url="/logout" />
+	</http>
+	<beans:bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+
+	<beans:bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
+		
+<!-- INICIO CONFIGURACAO DE AUTENTICACAO COM JDBC -->
+<!-- 	<beans:bean id="jdbcDaoUserService" -->
+<!-- 		class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl"> -->
+<!-- 		<beans:property name="dataSource" ref="dbDataSource" /> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean -->
+<!-- 		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider" -->
+<!-- 		p:userDetailsService-ref="jdbcDaoUserService" p:passwordEncoder-ref="passwordEncoder"> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<authentication-manager alias="authenticationManager"> -->
+<!-- 		<authentication-provider> -->
+<!-- 			<password-encoder hash="sha" /> -->
+<!-- 			<jdbc-user-service data-source-ref="dbDataSource" /> -->
+<!-- 		</authentication-provider>		 -->
+<!-- 	</authentication-manager> -->
+<!-- FIM CONFIGURACAO DE AUTENTICACAO COM JDBC -->
+
+<!-- INICIO CONFIGURACAO DE AUTENTICACAO COM LDAP -->
+	<beans:bean id="contextSource"
+	        class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		  <beans:constructor-arg value="ldap://187.18.40.162:389/"/>
+	  <beans:property name="userDn" value="CN=User Portal,OU=Contas de sistemas,DC=sinprfsc,DC=local"/>
+	  <beans:property name="password" value="6G3sc#io9"/>
+	</beans:bean>
+
+	<beans:bean id="bindAuthenticator" class="org.springframework.security.ldap.authentication.BindAuthenticator">
+		<beans:constructor-arg ref="contextSource" />
+		<beans:property name="userSearch" ref="userSearch"/>
+	</beans:bean>
+
+	<beans:bean id="userSearch"
+			class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<beans:constructor-arg>
+			<beans:value>OU=Contas de sistemas,DC=sinprfsc,DC=local</beans:value>
+		</beans:constructor-arg>
+		<beans:constructor-arg>
+			<beans:value>(sAMAccountName={0})</beans:value>
+		</beans:constructor-arg>
+		<beans:constructor-arg ref="contextSource" />
+		<beans:property name="searchSubtree">
+			<beans:value>true</beans:value>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="ldapAuthProvider"
+	    class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+	 <beans:constructor-arg ref="bindAuthenticator"/>
+	 <beans:constructor-arg>
+	   <beans:bean
+	     class="org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator">
+	     <beans:constructor-arg ref="contextSource"/>
+	     <beans:constructor-arg value="CN=Builtin,DC=sinprfsc,DC=local"/>
+	     <beans:property name="groupRoleAttribute" value="CN"/>
+	   </beans:bean>
+	 </beans:constructor-arg>
+	</beans:bean>
+	
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="ldapAuthProvider"/>
+	</authentication-manager>
+<!-- FIM CONFIGURACAO DE AUTENTICACAO COM LDAP -->
+	
+    <beans:bean id="savedRequestAwareAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+        <beans:property name="useReferer" value="true"/>
+    </beans:bean>
+
+</beans:beans>
