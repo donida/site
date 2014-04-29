@@ -19,7 +19,7 @@ html, body, form, div, iframe {height:100%;}
 <body>
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td align="center" valign="middle"><img src="assets/images/logo-revolua.gif" width="764" height="448" title="Revolua, soluções em automatização e sistemas"></td>
+    <td align="center" valign="middle"><img src="assets/images/logo-revolua.gif" width="764" height="448" title="Revolua, soluções em automatização"></td>
   </tr>
   <tr>
     <td align="center" valign="middle" bgcolor="#6e1717"><a href="mailto:contato@revolua.com"><img src="assets/images/txt.gif" width="407" height="35" border="0"></a></td>
