@@ -102,7 +102,7 @@
 				</div>
 				<div class="col-lg-3">
 					<h3>A Empresa</h3>
-					<p>Empresa  de desenvolvimento de aplicativos para a Internet, integração de sistemas e  consultoria em infra estrutura de TI.</p>
+					<p>Empresa de desenvolvimento de aplicativos para a Internet, integração de sistemas e consultoria em infraestrutura de TI.</p>
 				</div>
 
 				<div class="col-lg-1 centered">
@@ -111,7 +111,7 @@
 				<div class="col-lg-3">
 					<h3>O que fazemos</h3>
 					<p>Automatização de processos através de desenvolvimento de softwares em ambiente Web.<br>
-                    Consultoria em infra estrutura de TI por meio de instalações, manutenções e ampliações de ambientes computacionais.</p>
+					Consultoria em infraestrutura de TI por meio de instalações, manutenções e ampliações de ambientes computacionais.</p>
 				</div>
 			
 			
@@ -120,7 +120,7 @@
 				</div>
 				<div class="col-lg-3">
 					<h3>Público Alvo</h3>
-					<p>Empresas de pequeno, médio e grande porte, públicas ou privadas que necessitem de serviços de automação de processos computacionais e/ou consultoria em infra-estrutura de TI.</p>
+					<p>Empresas de pequeno, médio e grande porte, públicas ou privadas, que necessitem de serviços de automação de processos computacionais e/ou consultoria em infraestrutura de TI.</p>
 				</div>
 			
 			</div><!-- row -->
@@ -143,7 +143,7 @@
 			<div class="col-lg-4">
 				<img class="img-responsive" src="assets/img/sinprfsc/capa.jpg" alt="">
 				<h3><a href="#">SINPRF-SC</a></h3>
-				<p>Portal do Associado ao Sindicato da Policia Rodoviária Federal de Santa Catarina.</p>
+				<p>Portal do Associado ao Sindicato da Polícia Rodoviária Federal de Santa Catarina.</p>
 		  </div>
 			<div class="col-lg-4">
 				<img class="img-responsive" src="assets/img/hawk/capa.jpg" alt="">
